@@ -1,9 +1,11 @@
 {
   "name": "open-terminal-here",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "(OS-X Only) Adds a shortcut to Tree View - Open Terminal Here in the context menu",
   "activationCommands": {
-    ".tree-view .selected": ["open-terminal-here:open"]
+    ".tree-view .selected": [
+      "open-terminal-here:open"
+    ]
   },
   "repository": "https://github.com/blueimp/atom-open-terminal-here",
   "license": "MIT",
