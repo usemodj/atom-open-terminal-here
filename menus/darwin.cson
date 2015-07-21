@@ -1,3 +1,7 @@
 'context-menu':
-  '.platform-darwin .tree-view':
-    'Open Terminal Here': 'open-terminal-here:open'
+  '.platform-darwin .tree-view': [
+    {
+      label: 'Open Terminal Here',
+      command: 'open-terminal-here:open'
+    }
+  ]
