@@ -1,5 +1,5 @@
 'context-menu':
-  '.platform-darwin .tree-view, .platform-darwin atom-text-editor': [
+  '.platform-linux .tree-view, .platform-linux atom-text-editor': [
     {
       label: 'Open Terminal Here',
       command: 'open-terminal-here:open'

@@ -1,44 +1,50 @@
-exec = require("child_process").exec
-path = require('path')
-fs = require('fs')
+quotePath = (path) ->
+  "'" + path.replace(/'/g, "'\\''") + "'"
+
+switch require('os').platform()
+
+  when 'darwin'
+    defaultApp = 'Terminal.app'
+    getCmd = (app, args, dirpath) ->
+      "open -a #{quotePath app} #{args} #{quotePath dirpath}"
+
+  when 'win32'
+    defaultApp = 'cmd'
+    quotePath = (path) ->
+      '"' + path.replace(/"/g, '""') + '"'
+    getCmd = (app, args, dirpath) ->
+      "start /D #{quotePath dirpath} #{quotePath app} #{args}"
+
+  else
+    defaultApp = 'x-terminal-emulator'
+    getCmd = (app, args, dirpath) ->
+      "#{quotePath app} #{args} #{quotePath dirpath}"
 
 module.exports =
 
   configDefaults: {
-    app: 'Terminal.app'
+    app: defaultApp
     args: ''
-    win32App: 'cmd'
-    win32Args: ''
   },
 
   activate: ->
-    atom.commands.add '.tree-view .selected',
-      'open-terminal-here:open': (event) => @open(event.currentTarget)
+    atom.commands.add '.tree-view .selected, atom-text-editor, atom-workspace',
+      'open-terminal-here:open': (event) ->
 
-  open: (target) ->
-    isDarwin = document.body.classList.contains("platform-darwin")
-    isWin32 = document.body.classList.contains("platform-win32")
+        event.stopImmediatePropagation()
 
-    filepath = target.getPath?() ? target.item?.getPath()
+        filepath = @getPath?() || @getModel?().getPath?() ||
+          atom.workspace.getActivePaneItem()?.buffer?.file?.path ||
+          atom.project.getDirectories()[0]?.path
 
-    dirpath = filepath
+        return if not filepath
 
-    if fs.lstatSync(filepath).isFile()
-      dirpath = path.dirname(filepath)
+        if require('fs').lstatSync(filepath).isFile()
+          dirpath = require('path').dirname(filepath)
+        else
+          dirpath = filepath
 
-    return if not dirpath
+        app = atom.config.get 'open-terminal-here.app'
+        args = atom.config.get 'open-terminal-here.args'
 
-    if isDarwin
-      @openDarwin dirpath
-    else #isWin32
-      @openWin32 dirpath
-
-  openDarwin: (dirpath) ->
-    app = atom.config.get('open-terminal-here.app')
-    args = atom.config.get('open-terminal-here.args')
-    exec "open -a #{app} #{args} #{dirpath}"
-
-  openWin32: (dirpath) ->
-    app = atom.config.get('open-terminal-here.win32App')
-    args = atom.config.get('open-terminal-here.win32Args')
-    exec "start /D #{dirpath} #{app} #{args}"
+        require('child_process').exec getCmd(app, args, dirpath)

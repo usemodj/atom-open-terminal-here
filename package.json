@@ -1,9 +1,9 @@
 {
   "name": "open-terminal-here",
   "version": "0.6.1",
-  "description": "(OS-X Only) Adds a shortcut to Tree View - Open Terminal Here in the context menu",
+  "description": "Open the Terminal (OSX, Linux) or Command Prompt (Windows) in the given directory via context menu or keyboard shortcut.",
   "activationCommands": {
-    ".tree-view .selected": [
+    ".tree-view .selected, atom-text-editor, atom-workspace": [
       "open-terminal-here:open"
     ]
   },

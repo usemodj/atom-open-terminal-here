@@ -1,5 +1,5 @@
 'context-menu':
-  '.platform-win32 .tree-view': [
+  '.platform-win32 .tree-view, .platform-win32 atom-text-editor': [
     {
       label: 'Open Cmd Prompt Here',
       command: 'open-terminal-here:open'

@@ -1,5 +1,12 @@
-# Open Terminal Here package
+# Open Terminal Here
 
-(OS-X Only) Adds a shortcut to Tree View - Open Terminal Here in the context menu
+Open the Terminal (Mac OS X, Linux) or Command Prompt (Windows)
+in the given directory via context menu or keyboard shortcut.
 
-![Context menu entry to open a terminal at the given files path](https://raw.githubusercontent.com/blueimp/atom-open-terminal-here/master/screenshot-1.jpg)
+Platform | Keyboard shortcut
+-------- | -----------------
+Mac OS X | `ctrl-cmd-t`
+Windows  | `ctrl-shift-t`
+Linux    | `ctrl-shift-t`
+
+![Screenshot of an active tree view context menu with the "Open Terminal Here" item displayed](https://raw.githubusercontent.com/blueimp/atom-open-terminal-here/master/screenshot.png)
