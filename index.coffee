@@ -22,9 +22,13 @@ switch require('os').platform()
 
 module.exports =
 
-  configDefaults: {
-    app: defaultApp
-    args: ''
+  config: {
+    app:
+      type: 'string'
+      default: defaultApp
+    args:
+      type: 'string'
+      default: ''
   },
 
   activate: ->
