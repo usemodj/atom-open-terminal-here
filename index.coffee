@@ -1,3 +1,14 @@
+###
+ * Open Terminal Here - Atom package
+ * https://github.com/blueimp/atom-open-terminal-here
+ *
+ * Copyright 2015, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://opensource.org/licenses/MIT
+###
+
 quotePath = (path) ->
   "'" + path.replace(/'/g, "'\\''") + "'"
 
