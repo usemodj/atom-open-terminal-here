@@ -9,37 +9,23 @@
  * http://opensource.org/licenses/MIT
 ###
 
-quotePath = (path) ->
-  "'" + path.replace(/'/g, "'\\''") + "'"
-
 switch require('os').platform()
 
   when 'darwin'
-    defaultApp = 'Terminal.app'
-    getCmd = (app, args, dirpath) ->
-      "open -a #{quotePath app} #{args} #{quotePath dirpath}"
+    defaultCommand = 'open -a Terminal.app "$PWD"'
 
   when 'win32'
-    defaultApp = 'cmd'
-    quotePath = (path) ->
-      '"' + path.replace(/"/g, '""') + '"'
-    getCmd = (app, args, dirpath) ->
-      "start /D #{quotePath dirpath} #{quotePath app} #{args}"
+    defaultCommand = 'start /D "%cd%" cmd'
 
   else
-    defaultApp = 'x-terminal-emulator'
-    getCmd = (app, args, dirpath) ->
-      "#{quotePath app} #{args} #{quotePath dirpath}"
+    defaultCommand = 'x-terminal-emulator'
 
 module.exports =
 
   config: {
-    app:
+    command:
       type: 'string'
-      default: defaultApp
-    args:
-      type: 'string'
-      default: ''
+      default: defaultCommand
   },
 
   activate: ->
@@ -59,8 +45,7 @@ module.exports =
         else
           dirpath = filepath
 
-        app = atom.config.get 'open-terminal-here.app'
-        args = atom.config.get 'open-terminal-here.args'
+        command = atom.config.get 'open-terminal-here.command'
 
-        require('child_process').exec getCmd(app, args, dirpath),
+        require('child_process').exec command,
           cwd: dirpath
