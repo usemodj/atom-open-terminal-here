@@ -62,4 +62,5 @@ module.exports =
         app = atom.config.get 'open-terminal-here.app'
         args = atom.config.get 'open-terminal-here.args'
 
-        require('child_process').exec getCmd(app, args, dirpath)
+        require('child_process').exec getCmd(app, args, dirpath),
+          cwd: dirpath
