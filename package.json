@@ -5,6 +5,9 @@
   "activationCommands": {
     ".tree-view .selected, atom-text-editor, atom-workspace": [
       "open-terminal-here:open"
+    ],
+    "atom-workspace": [
+      "open-terminal-here:open-root"
     ]
   },
   "repository": "https://github.com/blueimp/atom-open-terminal-here",
