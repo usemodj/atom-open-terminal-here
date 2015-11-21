@@ -25,7 +25,8 @@ switch require('os').platform()
   when 'darwin'
     defaultCommand = 'open -a Terminal.app "$PWD"'
   when 'win32'
-    defaultCommand = 'start /D "%cd%" cmd'
+    defaultCommand = 'start /D "%cd%" cmd' +
+      ' /K "set NODE_PATH=& set NODE_ENV=& set GOOGLE_API_KEY="'
   else
     defaultCommand = 'x-terminal-emulator'
 
