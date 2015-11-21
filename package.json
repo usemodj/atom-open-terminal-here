@@ -1,6 +1,6 @@
 {
   "name": "open-terminal-here",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Open the Terminal (OSX, Linux) or Command Prompt (Windows) in the given directory via context menu or keyboard shortcut.",
   "activationCommands": {
     ".tree-view .selected, atom-text-editor, atom-workspace": [
