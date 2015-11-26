@@ -9,9 +9,22 @@
  * http://opensource.org/licenses/MIT
 ###
 
+getActiveFilePath = () ->
+  atom.workspace.getActivePaneItem()?.buffer?.file?.path
+
+getRootDir = () ->
+  dirs = atom.project.getDirectories()
+  defaultPath = dirs[0]?.path
+  return defaultPath if dirs.length < 2
+  activeFilePath = getActiveFilePath()
+  return defaultPath if not activeFilePath
+  for dir in dirs
+    return dir.path if activeFilePath.indexOf(dir.path + '/') is 0
+  defaultPath
+
 open = (filepath) ->
   if not filepath
-    dirpath = atom.project.getDirectories()[0]?.path
+    dirpath = getRootDir()
   else if require('fs').lstatSync(filepath).isFile()
     dirpath = require('path').dirname(filepath)
   else
@@ -40,8 +53,7 @@ module.exports =
     atom.commands.add '.tree-view .selected, atom-text-editor, atom-workspace',
       'open-terminal-here:open': (event) ->
         event.stopImmediatePropagation()
-        open @getPath?() || @getModel?().getPath?() ||
-          atom.workspace.getActivePaneItem()?.buffer?.file?.path
+        open @getPath?() || @getModel?().getPath?() || getActiveFilePath()
     atom.commands.add 'atom-workspace',
       'open-terminal-here:open-root': (event) ->
         event.stopImmediatePropagation()
