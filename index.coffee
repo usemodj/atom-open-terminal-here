@@ -41,7 +41,7 @@ switch require('os').platform()
     defaultCommand = 'start /D "%cd%" cmd' +
       ' /K "set NODE_PATH=& set NODE_ENV=& set GOOGLE_API_KEY="'
   else
-    defaultCommand = 'NODE_ENV= x-terminal-emulator'
+    defaultCommand = 'NODE_PATH= NODE_ENV= GOOGLE_API_KEY= x-terminal-emulator'
 
 module.exports =
   config: {
