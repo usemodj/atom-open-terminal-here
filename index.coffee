@@ -22,6 +22,15 @@ getRootDir = () ->
     return dir.path if activeFilePath.indexOf(dir.path + '/') is 0
   defaultPath
 
+filterProcessEnv = () ->
+  env = {}
+  for key, value of process.env
+    env[key] = value if key not in [
+      # Filter out environment variables leaked by the Atom process:
+      'NODE_PATH', 'NODE_ENV', 'GOOGLE_API_KEY', 'ATOM_HOME'
+    ]
+  env
+
 open = (filepath) ->
   if not filepath
     dirpath = getRootDir()
@@ -31,11 +40,7 @@ open = (filepath) ->
     dirpath = filepath
   return if not dirpath
   command = atom.config.get 'open-terminal-here.command'
-  env = {}
-  for key, value of process.env
-    env[key] = value if key not in ['NODE_PATH', 'NODE_ENV', 'GOOGLE_API_KEY', 'ATOM_HOME']
-  require('child_process').exec command,
-    {cwd: dirpath, env}
+  require('child_process').exec command, cwd: dirpath, env: filterProcessEnv()
 
 switch require('os').platform()
   when 'darwin'
