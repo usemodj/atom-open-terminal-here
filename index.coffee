@@ -31,17 +31,19 @@ open = (filepath) ->
     dirpath = filepath
   return if not dirpath
   command = atom.config.get 'open-terminal-here.command'
+  env = {}
+  for key, value of process.env
+    env[key] = value if key not in ['NODE_PATH', 'NODE_ENV', 'GOOGLE_API_KEY', 'ATOM_HOME']
   require('child_process').exec command,
-    cwd: dirpath
+    {cwd: dirpath, env}
 
 switch require('os').platform()
   when 'darwin'
     defaultCommand = 'open -a Terminal.app "$PWD"'
   when 'win32'
-    defaultCommand = 'start /D "%cd%" cmd' +
-      ' /K "set NODE_PATH=& set NODE_ENV=& set GOOGLE_API_KEY="'
+    defaultCommand = 'start /D "%cd%" cmd'
   else
-    defaultCommand = 'NODE_PATH= NODE_ENV= GOOGLE_API_KEY= x-terminal-emulator'
+    defaultCommand = 'x-terminal-emulator'
 
 module.exports =
   config: {
