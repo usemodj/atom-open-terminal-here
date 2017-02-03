@@ -10,7 +10,8 @@
 ###
 
 getActiveFilePath = () ->
-  atom.workspace.getActivePaneItem()?.buffer?.file?.path
+  document.querySelector('.tree-view .selected')?.getPath?() ||
+    atom.workspace.getActivePaneItem()?.buffer?.file?.path
 
 getRootDir = () ->
   dirs = atom.project.getDirectories()
