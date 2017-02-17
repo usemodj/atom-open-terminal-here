@@ -52,11 +52,10 @@ switch require('os').platform()
     defaultCommand = 'x-terminal-emulator'
 
 module.exports =
-  config: {
+  config:
     command:
       type: 'string'
       default: defaultCommand
-  },
   activate: ->
     atom.commands.add '.tree-view .selected, atom-text-editor, atom-workspace',
       'open-terminal-here:open': (event) ->
