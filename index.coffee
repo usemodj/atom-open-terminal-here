@@ -35,10 +35,12 @@ filterProcessEnv = () ->
 open = (filepath) ->
   if not filepath
     dirpath = getRootDir()
-  else if require('fs').lstatSync(filepath).isFile()
-    dirpath = require('path').dirname(filepath)
   else
-    dirpath = filepath
+    fs = require('fs')
+    if fs.lstatSync(fs.realpathSync(filepath)).isFile()
+      dirpath = require('path').dirname(filepath)
+    else
+      dirpath = filepath
   return if not dirpath
   command = atom.config.get 'open-terminal-here.command'
   require('child_process').exec command, cwd: dirpath, env: filterProcessEnv()
