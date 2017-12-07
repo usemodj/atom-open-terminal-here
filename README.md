@@ -3,6 +3,10 @@
 Open the Terminal (Mac OS X, Linux) or Command Prompt (Windows)
 in the given directory via context menu or keyboard shortcut.
 
+  Modify `open-terminal-here` for open elementary Terminal(`io.elementary.terminal`)
+in the current directory on Atom Editor of Elementary OS (Ubuntu base).
+
+
 ![Screenshot of the "Open Terminal Here" menu item displayed][1]
 
 ## Keyboard shortcuts
@@ -39,14 +43,18 @@ Linux    | `ctrl-alt-shift-t`
 
 #### Ubuntu Linux
 
-1. Install [xdotool][4]:  
+1. Install [xdotool][4]:
    `sudo apt-get install -y xdotool`
-2. Download [terminal-tab.sh][5] and make it executable:  
+2. Download [terminal-tab.sh][5] and make it executable:
    `chmod +x ./terminal-tab.sh`
-3. Move the script to a directory in your path:  
+3. Move the script to a directory in your path:
    `sudo mv ./terminal-tab.sh /usr/local/bin/terminal-tab`
-4. In the `open-terminal-here` settings, set `Command` to
-   `terminal-tab`.
+4. In the `open-terminal-here` settings,
+  set `Command` to
+```
+ terminal-tab .
+ ```
+ 
 
 [1]: https://raw.githubusercontent.com/blueimp/atom-open-terminal-here/master/screenshot.png
 [2]: https://en.wikipedia.org/wiki/Automator_(software)
