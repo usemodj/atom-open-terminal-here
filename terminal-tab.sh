@@ -40,16 +40,19 @@ while getopts t:w:k: opt; do
   esac
 done
 
+
 # Search for an open terminal emulator window and bring it into focus:
-#xdotool search --limit 1 --name "$WINDOW_NAME" windowactivate
 xdotool search --limit 1  --onlyvisible  --class "$WINDOW_CLASS" windowactivate
 
-# Check if xdotool found a matching window:
-if [ $? -eq 0 ]; then
-  # Open a new terminal emulator tab in the current working directory:
-  #xdotool key "$KEYSTROKE" type --delay 1 "cd '$(pwd | sed "s/'/'\\\''/g")';clear" && xdotool key Return
-    xdotool key "$KEYSTROKE" && xdotool sleep 1 && xdotool type --delay 1 --clearmodifiers "cd '$(pwd | sed "s/'/'\\\''/g")';clear" && xdotool key Return
+if [ $? -eq 0 ]; then # if an open terminal emulator exists
+  # Open a new tab of terminal emulator in the current working directory:
+  xdotool key "$KEYSTROKE" && xdotool sleep 1 && xdotool type --delay 1 --clearmodifiers "cd '$(pwd | sed "s/'/'\\\''/g")';clear" && xdotool key Return
 else
   # Open a new terminal emulator window:
   $TERMINAL_EMULATOR
+  xdotool sleep 2
+  # Search for an open terminal emulator window and bring it into focus:
+  xdotool search --limit 1  --onlyvisible  --class "$WINDOW_CLASS" windowactivate
+  # Open a new terminal emulator tab in the current working directory:
+  xdotool key "$KEYSTROKE" && xdotool sleep 1 && xdotool type --delay 1 --clearmodifiers "cd '$(pwd | sed "s/'/'\\\''/g")';clear" && xdotool key Return
 fi
