@@ -66,7 +66,7 @@ WINDOW_CLASS="io.elementary.terminal"
  ```
  
 
-[1]: https://github.com/usemodj/atom-open-terminal-here/master/screenshot.png
+[1]: https://raw.githubusercontent.com/blueimp/atom-open-terminal-here/master/screenshot.png
 [2]: https://en.wikipedia.org/wiki/Automator_(software)
 [3]: https://github.com/usemodj/atom-open-terminal-here/blob/master/terminal-tab.scpt
 [4]: http://www.semicomplete.com/projects/xdotool/
