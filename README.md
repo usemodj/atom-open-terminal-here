@@ -41,7 +41,17 @@ Linux    | `ctrl-alt-shift-t`
 5. In the `open-terminal-here` settings, set `Command` to
    `open -a TerminalTab.app "$PWD"`.
 
-#### Ubuntu Linux
+#### Elementary OS (based Ubuntu Linux)
+`Terminal` on Elementary OS is `io.Elementary.terminal`
+and thus modified only the `terminal-tab.sh`.
+
+On other Ubuntu Linux, change the `WINDOW_CLASS` script variable:
+```
+# `terminal-tab.sh` script:
+# Elementary OS Terminal,
+WINDOW_CLASS="io.elementary.terminal"
+ ...
+```
 
 1. Install [xdotool][4]:
    `sudo apt-get install -y xdotool`
@@ -56,8 +66,8 @@ Linux    | `ctrl-alt-shift-t`
  ```
  
 
-[1]: https://raw.githubusercontent.com/blueimp/atom-open-terminal-here/master/screenshot.png
+[1]: https://github.com/usemodj/atom-open-terminal-here/master/screenshot.png
 [2]: https://en.wikipedia.org/wiki/Automator_(software)
-[3]: https://github.com/blueimp/atom-open-terminal-here/blob/master/terminal-tab.scpt
+[3]: https://github.com/usemodj/atom-open-terminal-here/blob/master/terminal-tab.scpt
 [4]: http://www.semicomplete.com/projects/xdotool/
-[5]: https://raw.githubusercontent.com/blueimp/atom-open-terminal-here/master/terminal-tab.sh
+[5]: https://github.com/usemodj/atom-open-terminal-here/blob/master/terminal-tab.sh
